@@ -1,0 +1,54 @@
+
+* {
+  font-family: "Poppiins", sans-serif;
+}
+
+display-flex,
+.display-flex,
+.display-flex-center,
+.signup-content,
+signin-content,
+.social-logiin,
+.socials {
+  display: flex;
+  display: -webkit-flex;
+}
+
+.register-form {
+  width: 100%;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+.form-group:last-child{
+  margin-bottom: 0px;
+}
+
+label {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #222;
+}
+
+input {
+  width: 100%;
+  display: block;
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 6px 30px;
+}
+
+@media only screen and (max-width: 575px) {
+  .contact_submit_button {
+    font-size: 13px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
