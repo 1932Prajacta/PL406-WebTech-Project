@@ -1,0 +1,35 @@
+paper {
+    margin-top: 9%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.avatar {
+    margin: 1px;
+    background-color: orangered;
+   
+  }
+
+.form {
+    width: '100%';
+    margin-top: 1%;
+  }
+
+.submit {
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)';
+      margin: 3, 0, 2;
+      color: red;
+  }
+
+.card {
+      margin-top: 60px;
+      padding-left: '20px';
+      padding-right: '20px';
+      padding-bottom: '20px';
+  }
+  
+.pointer {
+      cursor: 'pointer';
+      color: red;
+  }
