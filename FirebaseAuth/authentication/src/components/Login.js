@@ -1,24 +1,21 @@
 import React, { useState } from 'react';
-import {Container, CssBaseline, Avatar, Typography, FormControlLabel, 
-    Button, Checkbox, Grid, Link, makeStyles, Card, CardContent} from '@material-ui/core';
-import {LockRounded} from '@material-ui/icons';
+import {Container, CssBaseline, Avatar, Typography, FormControlLabel, Checkbox, Button, Grid, Link, makeStyles, Card, CardContent} from '@material-ui/core';
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import fire from './fire';
 import {ToastContainer, toast} from 'react-toastify';
-import {ScaleLoader} from 'react-spinners';
 
 const Login = (props) => {
     const classes = useStyles();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberme, setRememberMe] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const [ loading, setLoading] = useState(false);
 
-    const override = `
-        display: block;
-        margin-left: 100px;
-        border-color: red;
-    `;
+    // const override = `
+    //     display: block;
+    //     margin-left: 100px;
+    //     border-color: red;
+    // `;
     const handleEmail = (event) => {
         setEmail(event.target.value);
     }
@@ -57,7 +54,6 @@ const Login = (props) => {
                     <CssBaseline/>
                     <div className={classes.paper}>
                         <Avatar className={classes.avatar}>
-                            <LockRounded/>
                         </Avatar>
                         <Typography component="h1" variant="h5">
                             Sign In
@@ -93,17 +89,6 @@ const Login = (props) => {
                                 errorMessages={['this field is required']}
                                 autoComplete="off"
                             />
-                        <FormControlLabel
-                            control={<Checkbox value={rememberme} onChange={(e) => handleCheck(e)}  color="primary" />}
-                            label="Remember me"
-                        />
-                        {loading ? (
-                            <ScaleLoader
-                            css={override}
-                            size={150}
-                            color={"#eb4034"}
-                            loading={loading}/>
-                        ) : (
                              <Button
                              type="submit"
                              fullWidth
@@ -112,8 +97,6 @@ const Login = (props) => {
                          >
                              Sign In
                          </Button>
-                        )}
-                        
                             <Grid container>
                                 <Grid item>
                                     <Link  onClick={props.toggle} className={classes.pointer} variant="body2">

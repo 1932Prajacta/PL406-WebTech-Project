@@ -3,7 +3,6 @@ import './App.css';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Navbar from './components/Navbar';
-//import fire from './components/fire';
 
 function App() {
   const [user, setUser] = useState('');
