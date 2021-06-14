@@ -18,6 +18,13 @@ Grid.mongo = mongoose.mongo;
 const app = express();
 const port = process.env.PORT || 9000
 
+const pusher = new Pusher({
+    appId: "1219114",
+    key: "76a2a535c2203dc6eeff",
+    secret: "3add4670c73f2d62e2dd",
+    cluster: "ap2",
+    useTLS: true
+  });
 
 //middlewares
 app.use(bodyParser.json());
@@ -42,6 +49,22 @@ mongoose.connect(mongoURI,{
 
 mongoose.connection.once('open',()=>{
     console.log('Db Connected');
+
+    const changeStream = mongoose.connection.collection('posts').watch()
+
+    changeStream.on('change', (change) =>{
+        console.log(change);
+
+        if (change.operationType === 'insert') {
+            console.log("Trigger Pusher");
+
+            pusher.trigger('posts','inserted',{
+                change : change
+            })
+        } else {
+            console.log("Error Triggering Pusher");
+        }
+    })
 })
 
 conn.once('open', () => {

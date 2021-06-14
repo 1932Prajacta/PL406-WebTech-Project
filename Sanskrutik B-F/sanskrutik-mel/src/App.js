@@ -16,7 +16,6 @@ function App() {
         user ? (
           <>
             <Header />
-
             <div className="app__body">
               <Sidebar />
               <Feed />
