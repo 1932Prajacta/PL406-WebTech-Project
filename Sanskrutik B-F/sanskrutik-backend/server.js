@@ -131,9 +131,4 @@ app.get('/retrieve/image/single', (req,res) => {
 
 })
 
-
-
-
-
-//listen
 app.listen(port,()=>console.log(`Server started at PORT : ${port}`))
