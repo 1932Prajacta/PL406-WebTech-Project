@@ -17,8 +17,6 @@ const MessageSender = () => {
     const [image, setImage] = useState(null)
     const [{ user }, dispatch] = useStateValue()
 
-    console.log(user)
-
     const handleChange = (e) =>  {
         
         if (e.target.files[0]) {
@@ -41,11 +39,9 @@ const MessageSender = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         if(image){
             const imgForm = new FormData()
             imgForm.append('file', image , image.name)
-            
             axios.post("/upload/image",imgForm,{
                 headers : {
                     'accept' : 'application/json',
@@ -53,7 +49,6 @@ const MessageSender = () => {
                     'Content-Type' : `multipart/form-data;boundary=${imgForm._boundary}`,
                 }
             }).then((res)=>{
-                console.log(res.data);
                 debugger;
                 const postData = {
                     text : input,
@@ -62,8 +57,6 @@ const MessageSender = () => {
                     avatar : user.photoURL,
                     timeStamp : Date.now()
                 }
-
-                console.log(postData);
                 savePost(postData);
             })
 
@@ -78,8 +71,6 @@ const MessageSender = () => {
             console.log(postData);
             savePost(postData);
         }
-
-
         setImageUrl('')
         setInput('')
         setImage(null)
@@ -96,7 +87,6 @@ const MessageSender = () => {
         <div className="messageSender"> 
             <div className="messageSender__top">
                 <Avatar src={user.photoURL} />
-
                 <form action="">
                     <input 
                         type="text"
@@ -105,7 +95,6 @@ const MessageSender = () => {
                         value={input}
                         onChange={(e)=> setInput(e.target.value)}
                     />
-
                     <Input 
                         id='fileSelector'
                         type="file" 
@@ -114,6 +103,7 @@ const MessageSender = () => {
                         onChange={handleChange} 
                         style={{display:'none'}}
                     />
+<<<<<<< HEAD
 
                 </form>
             </div>
@@ -131,8 +121,27 @@ const MessageSender = () => {
                 <div className="messageSender__option" type="submit" onClick={handleSubmit}>
                     <SendIcon style={{color:'#EF9B0F'}} />
                     <h3>Post</h3>
-                </div>
+=======
+                    <button 
+                        onClick={handleSubmit} 
+                        type="submit">Hidden Submit</button>
+                </form>
+            </div>
 
+            <div className="messageSender__bottom">              
+                <div className="messageSender__option">
+                    <VideocamIcon style={{color:'red'}} />
+                    <h3>Live Videos</h3>
+                </div>
+                <div className="messageSender__option">
+                    <PhotoLibraryIcon style={{color:'green'}} />
+                    <h3>Photo/Video</h3>
+                </div>
+                <div className="messageSender__option">
+                    <InsertEmoticonIcon style={{color:'orange'}} />
+                    <h3>Feeling/Activity</h3>
+>>>>>>> 76221b436d396915d25ed98984a862f5dc207aed
+                </div>
             </div>
         </div>
     )

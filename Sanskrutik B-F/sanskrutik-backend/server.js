@@ -11,7 +11,6 @@ import mongoPosts from './postModel.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
-
 Grid.mongo = mongoose.mongo;
 
 // app config
@@ -57,7 +56,6 @@ mongoose.connection.once('open',()=>{
 
         if (change.operationType === 'insert') {
             console.log("Trigger Pusher");
-
             pusher.trigger('posts','inserted',{
                 change : change
             })
@@ -120,10 +118,6 @@ app.post('/upload/post', (req,res)=>{
     })
 })
 
-
-
-
-
 app.get('/retrieve/posts', (req,res)=>{
     mongoPosts.find((err,data)=>{
         if (err) {
@@ -135,7 +129,6 @@ app.get('/retrieve/posts', (req,res)=>{
             res.status(200).send(data)
         }
     })
-
 })
 
 app.get('/retrieve/image/single', (req,res) => {
