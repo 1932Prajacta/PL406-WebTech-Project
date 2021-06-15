@@ -2,7 +2,7 @@ import { Avatar, Input } from '@material-ui/core'
 import React, { useState } from 'react'
 import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import SendIcon from '@material-ui/icons/Send';
 import './MessageSender.css';
 import { useStateValue } from '../StateProvider';
 import firebase from 'firebase';
@@ -20,10 +20,24 @@ const MessageSender = () => {
     console.log(user)
 
     const handleChange = (e) =>  {
+        
         if (e.target.files[0]) {
+            debugger;
             setImage(e.target.files[0]);
         }
     }  
+
+    
+    const selectFile = (e) => {
+      
+       const elem = document.getElementById('fileSelector')
+        if(elem && document.createEvent) {
+           var evt = document.createEvent("MouseEvents");
+           evt.initEvent("click", true, false);
+           elem.dispatchEvent(evt);
+        }
+       
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -93,33 +107,30 @@ const MessageSender = () => {
                     />
 
                     <Input 
+                        id='fileSelector'
                         type="file" 
                         disableUnderline={true}
                         className="messageSender__fileSelector" 
                         onChange={handleChange} 
+                        style={{display:'none'}}
                     />
 
-                    <button 
-                        onClick={handleSubmit} 
-                        type="submit">Hidden Submit</button>
                 </form>
             </div>
 
             <div className="messageSender__bottom">
-                
-                <div className="messageSender__option">
-                    <VideocamIcon style={{color:'red'}} />
-                    <h3>Live Videos</h3>
+
+                <div className="messageSender__option" onClick={selectFile}>
+                    <PhotoLibraryIcon 
+                        style={{color:'green'}}
+                    />
+                    <h3>Photo</h3>
+                   
                 </div>
 
-                <div className="messageSender__option">
-                    <PhotoLibraryIcon style={{color:'green'}} />
-                    <h3>Photo/Video</h3>
-                </div>
-
-                <div className="messageSender__option">
-                    <InsertEmoticonIcon style={{color:'orange'}} />
-                    <h3>Feeling/Activity</h3>
+                <div className="messageSender__option" type="submit" onClick={handleSubmit}>
+                    <SendIcon style={{color:'#EF9B0F'}} />
+                    <h3>Post</h3>
                 </div>
 
             </div>
