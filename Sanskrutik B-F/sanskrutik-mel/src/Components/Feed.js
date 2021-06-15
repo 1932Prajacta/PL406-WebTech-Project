@@ -9,7 +9,7 @@ import db from '../firebase'
 
 const pusher = new Pusher('76a2a535c2203dc6eeff', {
     cluster: 'ap2'
-  });
+});
 
 const Feed = () => {
     const [profilePic, setProfilePic] = useState('')
@@ -33,7 +33,6 @@ const Feed = () => {
     useEffect(() => {
         syncFeed()
     }, [])  
-
 
     return (
         <div className='feed' >
