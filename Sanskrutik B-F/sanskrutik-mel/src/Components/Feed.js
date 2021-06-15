@@ -39,7 +39,6 @@ const Feed = () => {
         <div className='feed' >
             <StoryReel />
             <MessageSender />
-
             {
                 postsData.map(entry => (
                     <Post
