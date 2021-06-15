@@ -53,8 +53,6 @@ const MessageSender = () => {
                 avatar : user.photoURL,
                 timeStamp : Date.now()
             }
-
-            console.log(postData);
             savePost(postData);
         }
         setImageUrl('')
