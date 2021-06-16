@@ -21,7 +21,7 @@ const MessageSender = () => {
         if (e.target.files[0]) {
             setImage(e.target.files[0]);
         }
-    }  
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,7 +35,7 @@ const MessageSender = () => {
                     'Content-Type' : `multipart/form-data;boundary=${imgForm._boundary}`,
                 }
             }).then((res)=>{
-                debugger;
+                // debugger;
                 const postData = {
                     text : input,
                     imgName : res.data.filename,
@@ -45,7 +45,6 @@ const MessageSender = () => {
                 }
                 savePost(postData);
             })
-
         }else{
             const postData = {
                 text : input, 
