@@ -2,7 +2,7 @@ import { Avatar, Input } from '@material-ui/core'
 import React, { useState } from 'react'
 import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import SendIcon from '@material-ui/icons/Send';
 import './MessageSender.css';
 import { useStateValue } from '../StateProvider';
 import firebase from 'firebase';
@@ -17,17 +17,35 @@ const MessageSender = () => {
     const [image, setImage] = useState(null)
     const [{ user }, dispatch] = useStateValue()
 
+    console.log(user)
+
     const handleChange = (e) =>  {
+        
         if (e.target.files[0]) {
+            debugger;
             setImage(e.target.files[0]);
         }
     }
 
+    
+    const selectFile = (e) => {
+      
+       const elem = document.getElementById('fileSelector')
+        if(elem && document.createEvent) {
+           var evt = document.createEvent("MouseEvents");
+           evt.initEvent("click", true, false);
+           elem.dispatchEvent(evt);
+        }
+       
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         if(image){
             const imgForm = new FormData()
             imgForm.append('file', image , image.name)
+            
             axios.post("/upload/image",imgForm,{
                 headers : {
                     'accept' : 'application/json',
@@ -35,7 +53,12 @@ const MessageSender = () => {
                     'Content-Type' : `multipart/form-data;boundary=${imgForm._boundary}`,
                 }
             }).then((res)=>{
+<<<<<<< HEAD
                 // debugger;
+=======
+                console.log(res.data);
+                debugger;
+>>>>>>> e8e58f392bc4395d9601b8ac46f614b5bc62d5d9
                 const postData = {
                     text : input,
                     imgName : res.data.filename,
@@ -43,6 +66,8 @@ const MessageSender = () => {
                     avatar : user.photoURL,
                     timeStamp : Date.now()
                 }
+
+                console.log(postData);
                 savePost(postData);
             })
         }else{
@@ -54,6 +79,8 @@ const MessageSender = () => {
             }
             savePost(postData);
         }
+
+
         setImageUrl('')
         setInput('')
         setImage(null)
@@ -70,6 +97,7 @@ const MessageSender = () => {
         <div className="messageSender"> 
             <div className="messageSender__top">
                 <Avatar src={user.photoURL} />
+
                 <form action="">
                     <input 
                         type="text"
@@ -78,31 +106,34 @@ const MessageSender = () => {
                         value={input}
                         onChange={(e)=> setInput(e.target.value)}
                     />
+
                     <Input 
+                        id='fileSelector'
                         type="file" 
                         disableUnderline={true}
                         className="messageSender__fileSelector" 
                         onChange={handleChange} 
+                        style={{display:'none'}}
                     />
-                    <button 
-                        onClick={handleSubmit} 
-                        type="submit">Hidden Submit</button>
+
                 </form>
             </div>
 
-            <div className="messageSender__bottom">              
-                <div className="messageSender__option">
-                    <VideocamIcon style={{color:'red'}} />
-                    <h3>Live Videos</h3>
+            <div className="messageSender__bottom">
+
+                <div className="messageSender__option" onClick={selectFile}>
+                    <PhotoLibraryIcon 
+                        style={{color:'green'}}
+                    />
+                    <h3>Photo</h3>
+                   
                 </div>
-                <div className="messageSender__option">
-                    <PhotoLibraryIcon style={{color:'green'}} />
-                    <h3>Photo/Video</h3>
+
+                <div className="messageSender__option" type="submit" onClick={handleSubmit}>
+                    <SendIcon style={{color:'#EF9B0F'}} />
+                    <h3>Post</h3>
                 </div>
-                <div className="messageSender__option">
-                    <InsertEmoticonIcon style={{color:'orange'}} />
-                    <h3>Feeling/Activity</h3>
-                </div>
+
             </div>
         </div>
     )
