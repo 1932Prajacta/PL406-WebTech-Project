@@ -11,6 +11,7 @@ import mongoPosts from './postModel.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
+
 Grid.mongo = mongoose.mongo;
 
 // app config
@@ -24,6 +25,7 @@ const pusher = new Pusher({
     cluster: "ap2",
     useTLS: true
   });
+  
 
 //middlewares
 app.use(bodyParser.json());
@@ -31,6 +33,8 @@ app.use(cors());
 
 //db config
 const mongoURI=process.env.DEV_DB_URI
+
+const promise = mongoose.connect(mongoURI, {useNewUrlParser : true}) 
 
 const conn = mongoose.createConnection(mongoURI,{
     useCreateIndex : true,
@@ -56,6 +60,7 @@ mongoose.connection.once('open',()=>{
 
         if (change.operationType === 'insert') {
             console.log("Trigger Pusher");
+
             pusher.trigger('posts','inserted',{
                 change : change
             })
@@ -73,7 +78,7 @@ conn.once('open', () => {
 });
 
 const storage = new GridFsStorage({
-    url : mongoURI,
+    db : promise,
     file : (req,file)=>{
         return new Promise((resolve,reject)=> {
             {    
@@ -96,9 +101,6 @@ const upload = multer({storage});
 //api routes
 app.get('/',(req,res)=> res.status(200).send('Hello Mr.Stark')); 
 
-
-
-
 app.post('/upload/image', upload.single('file') , (req,res)=> {
     res.status(201).send(req.file)
 })
@@ -118,6 +120,10 @@ app.post('/upload/post', (req,res)=>{
     })
 })
 
+
+
+
+
 app.get('/retrieve/posts', (req,res)=>{
     mongoPosts.find((err,data)=>{
         if (err) {
@@ -129,6 +135,7 @@ app.get('/retrieve/posts', (req,res)=>{
             res.status(200).send(data)
         }
     })
+
 })
 
 app.get('/retrieve/image/single', (req,res) => {
@@ -147,4 +154,9 @@ app.get('/retrieve/image/single', (req,res) => {
 
 })
 
+
+
+
+
+//listen
 app.listen(port,()=>console.log(`Server started at PORT : ${port}`))

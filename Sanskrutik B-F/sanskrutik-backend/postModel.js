@@ -5,7 +5,7 @@ const postModel = mongoose.Schema({
     imgName : String,
     text : String,
     avatar : String,
-    timeStamp : Number,
+    timeStamp : Number
 });
 
 export default mongoose.model('posts', postModel)
