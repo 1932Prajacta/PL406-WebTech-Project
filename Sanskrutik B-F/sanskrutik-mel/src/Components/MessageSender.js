@@ -19,8 +19,7 @@ const MessageSender = () => {
 
     console.log(user)
 
-    const handleChange = (e) =>  {
-        
+    const handleChange = (e) =>  {   
         if (e.target.files[0]) {
             debugger;
             setImage(e.target.files[0]);
@@ -29,19 +28,16 @@ const MessageSender = () => {
 
     
     const selectFile = (e) => {
-      
        const elem = document.getElementById('fileSelector')
         if(elem && document.createEvent) {
            var evt = document.createEvent("MouseEvents");
            evt.initEvent("click", true, false);
            elem.dispatchEvent(evt);
         }
-       
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
         if(image){
             const imgForm = new FormData()
             imgForm.append('file', image , image.name)
@@ -53,12 +49,7 @@ const MessageSender = () => {
                     'Content-Type' : `multipart/form-data;boundary=${imgForm._boundary}`,
                 }
             }).then((res)=>{
-<<<<<<< HEAD
-                // debugger;
-=======
-                console.log(res.data);
-                debugger;
->>>>>>> e8e58f392bc4395d9601b8ac46f614b5bc62d5d9
+                //debugger;
                 const postData = {
                     text : input,
                     imgName : res.data.filename,
@@ -66,8 +57,6 @@ const MessageSender = () => {
                     avatar : user.photoURL,
                     timeStamp : Date.now()
                 }
-
-                console.log(postData);
                 savePost(postData);
             })
         }else{
@@ -79,8 +68,6 @@ const MessageSender = () => {
             }
             savePost(postData);
         }
-
-
         setImageUrl('')
         setInput('')
         setImage(null)

@@ -6,33 +6,64 @@ import SubscriptionsOutlinedIcon from '@material-ui/icons/SubscriptionsOutlined'
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import { Avatar , IconButton } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import { useStateValue } from '../StateProvider'
+import {
+    BrowserRouter as Router,
+    useHistory,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
+
 
 const Header = () => {
 
     const [{user},dispatch] = useStateValue()
+    
+    const [searchkey,setsearchkey] = useState('')
+
+    const history = useHistory();
+    
+    console.log(user);
+    
+    const handlesearchinput = (e) =>{
+        if (e.key === 'Enter') {
+            const value = e.target.value;
+            setsearchkey(value);
+            console.log(searchkey);
+            history.push(
+                {
+                    pathname: '/searchresult',
+                    search: value
+                  });
+        }
+    }
 
     return (
-        <div className="header">
-            
+        <div className="header" data={searchkey}>  
             <div className="header__left">
                 <img src="/logo.png" alt="sans logo"></img>
             </div>
 
             <div className="header__input">
                 <SearchIcon />
-                <input placeholder='Search' type="text" />
+                <input 
+                    placeholder='Search'
+                    type="text"
+                    name="searchkey"
+                    onKeyDown={handlesearchinput}
+                />
             </div>
 
-
+            {/* header__option--active */}
             <div className="header__center">
-                <div className="header__option header__option--active">
-                    <HomeIcon fontSize='large' />
+                <div className="header__option">
+                    <Link to="/"><HomeIcon fontSize='large' /></Link>
                 </div>
                 <div className="header__option">
-                    <FlagIcon fontSize='large' />
+                    <Link to="/profile"><FlagIcon fontSize='large' /></Link>
                 </div>
                 <div className="header__option">
                         <SubscriptionsOutlinedIcon fontSize='large' />
@@ -44,24 +75,16 @@ const Header = () => {
                     <SupervisedUserCircleIcon fontSize='large' />
                 </div>
             </div>
-
-
             <div className="header__right">
                 <div className="header__info">
-                   
                     <Avatar src={user.photoURL}/>
                     <h4>{user.displayName}</h4>
                 </div>
-
-
                 <IconButton>
                 <ExpandMoreIcon />
                 </IconButton>
-
             </div>
-
         </div>
     )
 }
-
 export default Header

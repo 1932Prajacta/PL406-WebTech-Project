@@ -6,6 +6,16 @@ import Login from './Components/Login';
 import Sidebar from './Components/Sidebar';
 import Widgets from './Components/Widget';
 import { useStateValue } from './StateProvider';
+import Profile from './Components/Profile';
+import SearchResult from './Components/SearchResult';
+import Home  from './Home';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 function App() {
   const [{ user }, dispatch] = useStateValue()
@@ -15,19 +25,29 @@ function App() {
       {
         user ? (
           <>
-            <Header />
-
-            <div className="app__body">
-              <Sidebar />
-              <Feed />
-              <Widgets />
-            </div>
+            <Router>
+              <Header />
+              <div className="app__body">
+                <Sidebar />
+                <Switch>
+                  <Route exact path="/">
+                    <Feed />
+                    <Widgets />
+                  </Route>
+                  <Route path="/profile">
+                    <Profile />
+                  </Route>
+                  <Route path="/searchresult">
+                    <SearchResult />
+                  </Route>
+                </Switch>
+              </div>
+            </Router>
           </>
         ) : (
             <Login />
           )
       }
-
     </div>
   );
 }
