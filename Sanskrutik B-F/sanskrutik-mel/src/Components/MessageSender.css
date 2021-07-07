@@ -75,3 +75,7 @@
 .messageSender__option>h3:hover{
     transform: scale(1.2);
 }
+
+#file__name{
+    margin-left: 5%;
+}

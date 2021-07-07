@@ -19,25 +19,31 @@ const MessageSender = () => {
 
     console.log(user)
 
-    const handleChange = (e) =>  {   
+    const handleChange = (e) =>  {
+        
         if (e.target.files[0]) {
-            debugger;
-            setImage(e.target.files[0]);
-        }
-    }
 
+            setImage(e.target.files[0]);  
+            document.getElementById("file__name").textContent=e.target.files[0].name;         
+        }
+    }  
     
     const selectFile = (e) => {
+      
        const elem = document.getElementById('fileSelector')
         if(elem && document.createEvent) {
            var evt = document.createEvent("MouseEvents");
            evt.initEvent("click", true, false);
            elem.dispatchEvent(evt);
+           
         }
+       
     }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         if(image){
             const imgForm = new FormData()
             imgForm.append('file', image , image.name)
@@ -49,25 +55,36 @@ const MessageSender = () => {
                     'Content-Type' : `multipart/form-data;boundary=${imgForm._boundary}`,
                 }
             }).then((res)=>{
-                //debugger;
+                console.log(res.data);
+                debugger;
                 const postData = {
                     text : input,
                     imgName : res.data.filename,
                     user: user.displayName,
                     avatar : user.photoURL,
-                    timeStamp : Date.now()
+                    timeStamp : Date.now(),
+                    user_id : user.uid
                 }
+
+                console.log(postData);
                 savePost(postData);
             })
+
         }else{
             const postData = {
                 text : input, 
                 user: user.displayName,
                 avatar : user.photoURL,
-                timeStamp : Date.now()
+                timeStamp : Date.now(),
+                user_id : user.uid
             }
+
+            console.log(postData);
             savePost(postData);
         }
+
+        document.getElementById("file__name").textContent="";
+
         setImageUrl('')
         setInput('')
         setImage(null)
@@ -108,12 +125,13 @@ const MessageSender = () => {
 
             <div className="messageSender__bottom">
 
-                <div className="messageSender__option" onClick={selectFile}>
+                <div className="messageSender__option" onClick={selectFile} >
                     <PhotoLibraryIcon 
                         style={{color:'green'}}
                     />
                     <h3>Photo</h3>
-                   
+                    <div id="file__name"></div>
+
                 </div>
 
                 <div className="messageSender__option" type="submit" onClick={handleSubmit}>

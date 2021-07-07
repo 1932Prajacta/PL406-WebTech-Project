@@ -6,7 +6,7 @@ import SubscriptionsOutlinedIcon from '@material-ui/icons/SubscriptionsOutlined'
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import { Avatar , IconButton } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import React, { useState } from 'react';
+import React,{ useState } from 'react';
 import './Header.css';
 import { useStateValue } from '../StateProvider'
 import {
@@ -38,11 +38,14 @@ const Header = () => {
                     pathname: '/searchresult',
                     search: value
                   });
+            e.target.value="";
         }
+      
     }
 
     return (
-        <div className="header" data={searchkey}>  
+        <div className="header" data={searchkey}>
+            
             <div className="header__left">
                 <img src="/logo.png" alt="sans logo"></img>
             </div>
@@ -54,16 +57,17 @@ const Header = () => {
                     type="text"
                     name="searchkey"
                     onKeyDown={handlesearchinput}
+                    autoComplete="off"
                 />
             </div>
 
-            {/* header__option--active */}
+
             <div className="header__center">
-                <div className="header__option">
-                    <Link to="/"><HomeIcon fontSize='large' /></Link>
+                <div className="header__option header__option--active">
+                    <Link to="/" class="header__link"><HomeIcon fontSize='large' /></Link>
                 </div>
                 <div className="header__option">
-                    <Link to="/profile"><FlagIcon fontSize='large' /></Link>
+                    <FlagIcon fontSize='large' />
                 </div>
                 <div className="header__option">
                         <SubscriptionsOutlinedIcon fontSize='large' />
@@ -75,16 +79,24 @@ const Header = () => {
                     <SupervisedUserCircleIcon fontSize='large' />
                 </div>
             </div>
+
+
             <div className="header__right">
                 <div className="header__info">
+                   
                     <Avatar src={user.photoURL}/>
                     <h4>{user.displayName}</h4>
                 </div>
+
+
                 <IconButton>
                 <ExpandMoreIcon />
                 </IconButton>
+
             </div>
+
         </div>
     )
 }
+
 export default Header

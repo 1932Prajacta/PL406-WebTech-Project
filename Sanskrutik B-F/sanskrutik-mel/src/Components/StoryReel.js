@@ -18,7 +18,7 @@ const StoryReel = () => {
             />
 
              <Story 
-                image='https://scontent.fnag1-1.fna.fbcdn.net/v/t1.6435-1/p200x200/67905297_211616013177414_5300320613443829760_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=Jy2D7b0IZgYAX_dzNQQ&_nc_ht=scontent.fnag1-1.fna&tp=6&oh=6d6b0662cdafe89b5cf32b83497b5d96&oe=60D065EB'
+                image='https://scontent.fnag1-1.fna.fbcdn.net/v/t1.6435-1/p200x200/67905297_211616013177414_5300320613443829760_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=9i-8mdGXxQMAX_ggALD&_nc_ht=scontent.fnag1-1.fna&tp=6&oh=9ee409e4aa8add8890566a0b0222570f&oe=60EA1B2B'
                 profileSrc='https://twitter.com/Iron_Man?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor'
                 title='Prajacta Mauskar'
             />

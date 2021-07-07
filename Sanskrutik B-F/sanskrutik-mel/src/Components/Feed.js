@@ -9,7 +9,7 @@ import db from '../firebase'
 
 const pusher = new Pusher('76a2a535c2203dc6eeff', {
     cluster: 'ap2'
-});
+  });
 
 const Feed = () => {
     const [profilePic, setProfilePic] = useState('')
@@ -39,14 +39,18 @@ const Feed = () => {
         <div className='feed' >
             <StoryReel />
             <MessageSender />
+
             {
-                postsData.map(entry => (
+                postsData.map(post => (
                     <Post
-                        profilePic={entry.avatar}
-                        message={entry.text}
-                        timeStamp={entry.timeStamp}
-                        imgName={entry.imgName}
-                        username={entry.user}
+                        postId={post._id}
+                        profilePic={post.avatar}
+                        message={post.text}
+                        timeStamp={post.timeStamp}
+                        imgName={post.imgName}
+                        username={post.user}
+                        likes={post.likes}
+                        comments={post.comments}
                     />
                 ))
             }

@@ -1,6 +1,6 @@
 .header{
     display : flex;
-    padding: 12px 15px; 
+    padding: 6px 15px; 
     justify-content: space-between;
     position: sticky;
     background-image: linear-gradient(to left, red , yellow);
@@ -15,16 +15,17 @@
 }
 
 .header__left>img{
-    height : 60px;
+    height : 40px;
+    margin : 6% auto;
 }
 
 .header__input{
     display :flex;
     align-items: center;
     background-color:#FFFAFA;
-    padding: 10px;
-    margin-left: 10px;
-    border-radius: 20px;
+    padding: 3px;
+    margin-left: 1.5%;
+    border-radius: 15px;
 }
 
 .header__input>input{
@@ -34,17 +35,17 @@
 }
 
 ::placeholder{
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 input[type='text']{
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .header__center{
     display: flex;
     flex: 1;
-    margin-left: 4%;
+    margin: auto 10% auto 10%;
 }
 
 .header__option{
@@ -61,16 +62,15 @@ input[type='text']{
     border-bottom: none;
 }
 
-.header__option--active>.MuiSvgIcon-root{
-    color:#EF9B0F;
-}
 
 .header__option--active{
-    border-bottom: 4px solid #ff0000;
+    
+
 }
 
 .header__option>.MuiSvgIcon-root{
     color: rgb(255, 255, 255);
+    font-size: 2rem;
 }
 
 .header__option:hover>.MuiSvgIcon-root{
@@ -91,3 +91,11 @@ input[type='text']{
     display: flex;
 }
 
+.header__link{
+    color: rgb(255, 255, 255);
+    height: 34px;
+}
+
+.header__link:hover{
+    color: #FA0F00;
+}
