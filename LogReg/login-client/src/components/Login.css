@@ -1,0 +1,16 @@
+
+.login {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.login>div>img {
+    object-fit: contain;
+    height: 30%;
+    max-width: 45%;
+    margin: -5% auto;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
